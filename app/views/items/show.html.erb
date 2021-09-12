@@ -7,71 +7,62 @@
       <%= @item.item_name %>
     </h2>
     <div class="item-img-content">
-       <% @item.images.each do |image| %>
-       <%= image_tag image, class: "item-box-img" %>
-       <% end %>
-      <% if @item.order.present? %>
+       <%= image_tag @item.image, class: "item-box-img" %>
+      <%# if @item.order.present? %>
       <div class="sold-out">
         <span>Sold Out!!</span>
       </div>
-      <% end %>
+      <%# end %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
-       <%= @item.price %>
+       <%= @item.price %>円
       </span>
       <span class="item-postage">
-        <%= @item.burden_method.name %>
+        <%= @item.size.name %>
       </span>
     </div>
-    <% if @item.order.present? %>
-    <% elsif user_signed_in? && current_user.id == @item.user_id %>
-    <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
-    <p class="or-text">or</p>
-    <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
-    <% elsif user_signed_in? %>
-    <%= link_to "購入画面に進む", item_orders_path(@item.id) ,class:"item-red-btn"%>
-    <% end %>
+    
+    <%# if @item.order.present? %>
+    <%# 管理者権限の有無で条件分岐に書き換えること %>
+    <%# if customer_signed_in? && current_customer.id == @item.user_id %>
+    <%#= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
+    <%#<p class="or-text">or</p>%>
+    <%#= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
+    <%# elsif customer_signed_in? %>
+    <%#= link_to "購入画面に進む", item_orders_path(@item.id) ,class:"item-red-btn"%>
+    <%# end %>
 
 
     <div class="item-explain-box">
       <span><%= @item.explanation %></span>
     </div>
 
-    <%# タグの表示 %>
     <div class="item-explain-box">
-      <span><% @item.tags.each do |tag| %>
-            <%= tag.tag_name %>
-            <% end %>
-      </span>
+      <span>栄養成分</span>
     </div>
-    <%# /タグの表示 %>
 
     <table class="detail-table">
       <tbody>
         <tr>
-          <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= @item.user.nickname %></td>
+          <th class="detail-item">エネルギー</th>
+          <td class="detail-value"><%= @item.calorie %>kcal</td>
         </tr>
         <tr>
-          <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= @item.category.name %></td>
+          <th class="detail-item">たんぱく質</th>
+          <td class="detail-value"><%= @item.protein %>g</td>
         </tr>
         <tr>
-          <th class="detail-item">商品の状態</th>
-          <td class="detail-value"><%= @item.status.name %></td>
+          <th class="detail-item">脂質</th>
+          <td class="detail-value"><%= @item.fat %>g</td>
         </tr>
         <tr>
-          <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= @item.burden_method.name%></td>
+          <th class="detail-item">炭水化物</th>
+          <td class="detail-value"><%= @item.carb %>g</td>
         </tr>
         <tr>
-          <th class="detail-item">発送元の地域</th>
-          <td class="detail-value"><%= @item.shipment_source.name %></td>
-        </tr>
-        <tr>
-          <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= @item.shipping_days.name %></td>
+          <th class="detail-item">食塩相当量</th>
+          <td class="detail-value"><%= @item.salt %>g</td>
         </tr>
       </tbody>
     </table>
@@ -87,26 +78,6 @@
     </div>
   </div>
   <%# /商品の概要 %>
-  <%# 以下、コメント一覧の表示（CSS未実装）%>
-        <h4>＜コメント一覧＞</h4>
-      <div class="comments", id="comment_list">
-      <% @comments.reverse_each do |comment| %>
-        <p>
-          <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>：</strong>
-          <%= comment.text %>
-        </p>
-      <% end %>
-    </div>
-  <%#以上、コメント投稿一覧の表示%>
-
-  <%# 以下、コメント投稿フォームの追加（CSS未実装）%>
-  <div class="container">
-      <%= form_with(model: [@item, @comment], local: true) do |form| %>
-        <%= form.text_area :text, placeholder: "コメントする", rows: "2" %>
-        <%= form.submit "SEND" %>
-      <% end %>
-  </div>
-<%# 以上、コメント投稿フォームの追加%>
 
   <div class="comment-box">
     <form>
@@ -130,7 +101,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="#" class="another-item"><%= @item.category.name%>をもっと見る</a>
+  <a href="#" class="another-item"><%= @item.size.name%>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>

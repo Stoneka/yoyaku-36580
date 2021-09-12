@@ -1,10 +1,15 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: [:show]
   def index
     @items = Item.all
   end
 
   def new
     @item = Item.new
+  end
+
+  def show
+
   end
 
   def create
