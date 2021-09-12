@@ -184,4 +184,10 @@
   <span class='purchase-btn-text'>出品する</span>
   <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
 <% end %>
+<div>
+<%= link_to( manage_items_path, class: 'item-contents') do %>
+  <span class='item-lists'>管理する</span>
+  <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
+<% end %>
+</div>
 <%= render "shared/footer" %>
