@@ -134,14 +134,12 @@
 
         <%= link_to item_path(item.id) do %>
           <div class='item-img-content'>
-            <% item.images.each do |image| %>
-            <%= image_tag image, class: "item-img" %>
-          <% end %>
-          <% if item.order.present? %>
+            <%= image_tag item.image, class: "item-img" %>
+          <%# if item.order.present? %>
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
-          <% end %>
+          <%# end %>
 
         </div>
         <div class='item-info'>
@@ -149,7 +147,7 @@
             <%= item.item_name %>
           </h3>
           <div class='item-price'>
-            <span><%= item.price %>円<br><%= item.burden_method.name %></span>
+            <span><%= item.price %>円<br><%= item.size.name %></span>
             <div class='star-btn'>
               <%= image_tag "star.png", class:"star-icon" %>
               <span class='star-count'>0</span>

@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   def index
+    @items = Item.all
   end
 
   def new
@@ -23,6 +24,10 @@ private
       :image, :item_name, :explanation, :size_id, :price,
       :calorie, :protein, :fat, :salt, :carb
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 
   end
