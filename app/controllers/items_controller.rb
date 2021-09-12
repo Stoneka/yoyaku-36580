@@ -37,6 +37,13 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
 
+  def manage
+    @items = Item.all
+    unless current_customer.admin?
+      redirect_to root_path
+    end
+  end
+
 
 private
 
