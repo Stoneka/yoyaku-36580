@@ -26,7 +26,7 @@
     <%# if @item.order.present? %>
     <%# 管理者権限の有無で条件分岐に書き換えること %>
     <%# if customer_signed_in? && current_customer.id == @item.user_id %>
-    <%#= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
+    <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
     <%#<p class="or-text">or</p>%>
     <%#= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
     <%# elsif customer_signed_in? %>
