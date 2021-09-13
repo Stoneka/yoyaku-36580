@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     end
     resources :reserves , only: [:create]
   end
+  resources :carts , only: [:show]
 
 end

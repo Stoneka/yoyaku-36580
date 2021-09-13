@@ -4,9 +4,10 @@ before_action :set_item, only: [:create]
     @reserve = CartReserve.new(reserve_params)
     if @reserve.valid?
      @reserve.save
-     return redirect_to root_path
+     @cart = Cart.find_by(customer_id: @reserve.customer_id)
+     redirect_to cart_path(@cart.id)
     else
-      render "items/show"
+     render "items/show"
     end
   end
 
