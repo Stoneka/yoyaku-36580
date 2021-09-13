@@ -79,6 +79,64 @@
   </div>
   <%# /商品の概要 %>
 
+  <%# 予約フォーム %>
+  <%= form_with model:@reserve, url: item_reserves_path(@item.id), id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+  <%= render 'shared/error_messages', model: f.object %>
+    <%# 予約内容の入力 %>
+    <div class='shipping-address-form'>
+      <h1 class='info-input-haedline'>
+        ご予約フォーム
+      </h1>
+      <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">数量</label>
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_field :quantity, class:"input-default", id:"quantity", placeholder:"例）123-4567", maxlength:"8" %>
+      </div>
+      <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">メッセージ</label>
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_field :message, class:"input-default", id:"message", placeholder:"例）横浜市緑区"%>
+      </div>
+      <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">敬称</label>
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.radio_button :honorific, :"さん" %>
+        <%= f.label :honorific, "さん", {value: :"さん", style: "display: inline-block;"} %>
+        <%= f.radio_button :honorific, :"ちゃん" %>
+        <%= f.label :honorific, "ちゃん", {value: :"ちゃん", style: "display: inline-block;"} %>
+        <%= f.radio_button :honorific, :"くん" %>
+        <%= f.label :honorific, "くん", {value: :"くん", style: "display: inline-block;"} %>
+        <%= f.radio_button :honorific, :"なし" %>
+        <%= f.label :honorific, "なし", {value: :"なし", style: "display: inline-block;"} %>
+      </div>
+      <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">タイトル</label>
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.radio_button :use_case, :"お誕生日おめでとう" %>
+        <%= f.label :use_case, "お誕生日おめでとう", {value: :"お誕生日おめでとう", style: "display: inline-block;"} %>
+        <%= f.radio_button :use_case, :"HappyBirthday" %>
+        <%= f.label :use_case, "HappyBirthday", {value: :"HappyBirthday", style: "display: inline-block;"} %>
+        <%= f.radio_button :use_case, :"祝" %>
+        <%= f.label :use_case, "祝", {value: :"祝", style: "display: inline-block;"} %>
+        <%= f.radio_button :use_case, :"なし" %>
+        <%= f.label :use_case, "なし", {value: :"なし", style: "display: inline-block;"} %>
+      </div>
+    </div>
+    <%# /配送先の入力 %>
+    <div class='buy-btn'>
+      <%= f.submit "カートへ入れる" ,class:"buy-red-btn", id:"button" %>
+    </div>
+  <% end %>
+  <%# /予約フォーム %>
+
   <div class="comment-box">
     <form>
       <textarea class="comment-text"></textarea>

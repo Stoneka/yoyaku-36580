@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   has_one_attached :image
+  has_many :reserves
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :size

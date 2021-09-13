@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     collection do
       get 'manage'
     end
+    resources :reserves , only: [:create]
   end
-  resources :reserves , only: [:create]
+
 end

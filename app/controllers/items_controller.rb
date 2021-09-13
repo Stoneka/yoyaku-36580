@@ -19,6 +19,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @reserve = CartReserve.new
   end
 
   def edit
