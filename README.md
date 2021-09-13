@@ -43,7 +43,7 @@
 | quantity  | integer    | null: false                    |
 | message   | text       | null: false                    |
 | honorific | string     | null: false                    |
-| case      | string     | null: false                    |
+| use_case  | string     | null: false                    |
 | customer  | references | null: false, foreign_key: true |
 | item      | references | null: false, foreign_key: true |
 | cart      | references | null: false, foreign_key: true |
