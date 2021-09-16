@@ -197,11 +197,20 @@
   <% end %>
 </div>
 <% if customer_signed_in?%>
-<div>
-<%= link_to( cart_path(current_customer.cart), class: 'item-contents') do %>
-  <span class='item-lists'>カートの中を見る</span>
-  <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
-<% end %>
-</div>
+  <% if current_customer.cart.present? %>
+    <div>
+        <%= link_to( cart_path(current_customer.cart), class: 'item-contents') do %>
+        <span class='item-lists'>カートの中を見る</span>
+        <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
+      <% end %>
+    </div>
+  <% else %>
+    <div>
+        <%= link_to( "#", class: 'item-contents') do %>
+        <span class='item-lists'>カートの中を見る</span>
+        <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
 <%= render "shared/footer" %>

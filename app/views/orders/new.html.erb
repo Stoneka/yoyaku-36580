@@ -8,7 +8,6 @@
     <%# 予約内容の表示 %>
     <div class='buy-item-info'>
       <%= image_tag @reserve.item.image, class: 'buy-item-img' %>
-      <% end %>
       <div class='buy-item-right-content'>
         <h2 class='buy-item-text'>
           <%= @reserve.item.item_name %>
@@ -32,7 +31,7 @@
     </div>
     <%# /支払額の表示 %>
 
-    <%= form_with model:@order_request, url:item_reserf_orders_path(@reserve.item_id, @reserve.id), id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+    <%= form_with model:@order_request, url:item_reserf_orders_path(@reserve.item_id, @reserve.id), method: post, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
     <%= render 'shared/error_messages', model: f.object %>
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
@@ -81,14 +80,14 @@
       </h1>
       <div class="form-group">
         <div class='form-text-wrap'>
-          <label class="form-text">郵便番号</label>
+          <label class="form-text">お受け取り日</label>
           <span class="indispensable">必須</span>
         </div>
-        <%= f.text_field :visit_date, class:"input-default", id:"postal-code", placeholder:"例）123-4567", maxlength:"8" %>
+        <%= f.text_field :visit_date, class:"input-default", id:"postal-code", placeholder:"2021/01/01", maxlength:"10" %>
       </div>
       <div class="form-group">
         <div class='form-text-wrap'>
-          <label class="form-text">都道府県</label>
+          <label class="form-text">お受け取り時間</label>
           <span class="indispensable">必須</span>
         </div>
         <%= f.collection_select(:visit_time_id, VisitTime.all, :id, :name, {}, {class:"select-box", id:"prefecture"}) %>

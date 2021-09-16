@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+before_action :set_reserve, only: [:new,:create]
+
   def new
     @order_request = OrderRequest.new
   end
@@ -18,15 +20,22 @@ class OrdersController < ApplicationController
   def order_request_params
     params.require(:order_request).permit(
       :visit_date, :visit_time_id).merge(
-      reserve_id: params[:reserve_id],token: params[:token])
+      reserve_id: params[:reserf_id]
+      #,token: params[:token]
+    )
   end
   
-  #def pay_item
-  #  Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
-  #  Payjp::Charge.create(
-  #    amount: @item.price,
-  #    card: order_shipping_params[:token],
-  #    currency: 'jpy'
-  #  )
-  #end
+  def set_reserve
+    @reserve = Reserve.find(params[:reserf_id])
+  end
 end
+=begin
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: order_shipping_params[:token],
+      currency: 'jpy'
+    )
+  end
+=end
