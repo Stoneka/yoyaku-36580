@@ -1,0 +1,55 @@
+<%= render "shared/header" %>
+    <%= link_to "予約済商品一覧", "#", class: "item-red-btn" %>
+<%# 予約の概要 %>
+<div class="item-show">
+  <% @reserves.each do |reserve|%>
+  <div class="item-box">
+    <h2 class="name">
+      <%= reserve.item.item_name %>
+    </h2>
+    <div class="item-price-box">
+      <span class="item-price">
+       <%= reserve.customer.last_name %>様
+      </span>
+      <span class="item-price">
+        数量<%= reserve.quantity %>個
+      </span>
+      <span class="item-price">
+       メッセージ内容<br>
+       <%= reserve.message %>
+       <%= reserve.honorific %>
+      </span>
+      <span class="item-price">
+       <%= reserve.use_case %>
+      </span>
+      <span class="item-postage">
+        お渡し日時<%#= reserved date and time %>
+      </span>
+    </div>
+  <% end %>
+      <div class="comment-box">
+    <form>
+      <textarea class="comment-text"></textarea>
+      <p class="comment-warn">
+        相手のことを考え丁寧なコメントを心がけましょう。
+        <br>
+        不快な言葉遣いなどは利用制限や退会処分となることがあります。
+      </p>
+      <button type="submit" class="comment-btn">
+        <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
+        <span>コメントする<span>
+      </button>
+    </form>
+  </div>
+  <div class="links">
+    <a href="#" class="change-item-btn">
+      ＜ 前の商品
+    </a>
+    <a href="#" class="change-item-btn">
+      後ろの商品 ＞
+    </a>
+  </div>
+  <a href="#" class="another-item"><%#= @item.size.name%>をもっと見る</a>
+</div>
+
+<%= render "shared/footer" %>

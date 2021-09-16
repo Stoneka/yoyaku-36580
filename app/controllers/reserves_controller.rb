@@ -1,5 +1,6 @@
 class ReservesController < ApplicationController
 before_action :set_item, only: [:create]
+
   def create
     @reserve = CartReserve.new(reserve_params)
     if @reserve.valid?
@@ -8,6 +9,20 @@ before_action :set_item, only: [:create]
      redirect_to cart_path(@cart.id)
     else
      render "items/show"
+    end
+  end
+
+  def destroy
+    @reserve_data = Reserve.find(params[:id])
+    @cart_data = Cart.find_by(customer_id: @reserve_data.customer_id)
+    @reserve_data.destroy
+    redirect_to cart_path(@cart_data.id)
+  end
+
+  def manage
+    @reserves = Reserve.includes(:customer, :item)
+    unless current_customer.admin?
+      redirect_to root_path
     end
   end
 

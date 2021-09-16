@@ -185,9 +185,23 @@
   <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
 <% end %>
 <div>
-<%= link_to( manage_items_path, class: 'item-contents') do %>
-  <span class='item-lists'>管理する</span>
+  <%= link_to( manage_items_path, class: 'item-contents') do %>
+    <span class='item-lists'>商品を管理する</span>
+    <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
+  <% end %>
+</div>
+<div>
+  <%= link_to( reserve_path, class: 'item-contents') do %>
+    <span class='item-lists'>予約を管理する</span>
+    <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
+  <% end %>
+</div>
+<% if customer_signed_in?%>
+<div>
+<%= link_to( cart_path(current_customer.cart), class: 'item-contents') do %>
+  <span class='item-lists'>カートの中を見る</span>
   <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
 <% end %>
 </div>
+<% end %>
 <%= render "shared/footer" %>
