@@ -19,6 +19,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @reserve = CartReserve.new
   end
 
   def edit
@@ -58,4 +59,4 @@ private
     @item = Item.find(params[:id])
   end
 
-  end
+end

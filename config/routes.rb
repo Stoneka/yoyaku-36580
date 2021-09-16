@@ -5,5 +5,9 @@ Rails.application.routes.draw do
     collection do
       get 'manage'
     end
+    resources :reserves , only: [:create, :destroy]
   end
+  resources :carts , only: [:show]
+  get 'reserve', to: 'reserves#manage'
+  #上記は予約管理ページのurlを与えている。
 end

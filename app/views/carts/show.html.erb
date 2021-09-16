@@ -1,0 +1,80 @@
+<%= render "shared/header" %>
+<div class='main'>
+  <%# 予約一覧 %>
+  <div class='item-contents'>
+    <h2 class='title'>現在のカート</h2>
+    <div class="subtitle" >
+      ご予約商品
+    </div>
+
+    <ul class='item-lists'>
+      <% if @reserves.present? %>
+      <% @reserves.each do |reserve| %>
+      <li class='list'>
+
+        <%#= link_to item_path(reserve.item_id) do %>
+        <div class='item-img-content'>
+            <%= image_tag reserve.item.image, class: "item-img" %>
+          <%# if item.order.present? %>
+          <div class='sold-out'>
+            <span>Sold Out!!</span>
+          </div>
+          <%# end %>
+
+        </div>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            <%= reserve.item.item_name %>
+          </h3>
+          <div class='item-price'>
+            <span><%= reserve.item.price %>円<br><%= reserve.item.size.name %></span>
+            <div class='star-btn'>
+              <%= image_tag "star.png", class:"star-icon" %>
+              <span class='star-count'>0</span>
+            </div>
+          </div>
+          <h3 class='item-name'>
+            <%= link_to "予約を取り消す", item_reserf_path(reserve.item_id, reserve.id), method: :delete %>
+          </h3>
+        </div>
+        <%# end %>
+      </li>
+      <% end %>
+      <% else %>
+      <li class='list'>
+        <%= link_to '#' do %>
+        <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            カートに商品はございません。
+          </h3>
+          <div class='item-price'>
+            <span>99999999円<br>(税込み)</span>
+            <div class='star-btn'>
+              <%= image_tag "star.png", class:"star-icon" %>
+              <span class='star-count'>0</span>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <%# /予約一覧 %>
+  <%# 購入手続 %>
+  <div>
+    <%= link_to( "#", class: 'item-contents') do %>
+    <span class='item-lists'>購入手続きへ進む</span>
+    <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to( root_path, class: 'item-contents') do %>
+    <span class='item-lists'>お買い物を続ける</span>
+    <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
+    <% end %>
+  </div>
+  <%# /購入手続 %>
+</div>
+<%= render "shared/footer" %>
