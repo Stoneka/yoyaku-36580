@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_13_022520) do
+ActiveRecord::Schema.define(version: 2021_09_16_082424) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -73,6 +73,22 @@ ActiveRecord::Schema.define(version: 2021_09_13_022520) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "reserve_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reserve_id"], name: "index_orders_on_reserve_id"
+  end
+
+  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.date "visit_date", null: false
+    t.integer "visit_time_id", null: false
+    t.bigint "order_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_requests_on_order_id"
+  end
+
   create_table "reserves", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "quantity", null: false
     t.text "message", null: false
@@ -90,6 +106,8 @@ ActiveRecord::Schema.define(version: 2021_09_13_022520) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "carts", "customers"
+  add_foreign_key "orders", "reserves", column: "reserve_id"
+  add_foreign_key "requests", "orders"
   add_foreign_key "reserves", "carts"
   add_foreign_key "reserves", "customers"
   add_foreign_key "reserves", "items"
