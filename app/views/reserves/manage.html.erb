@@ -3,29 +3,33 @@
 <%# 予約の概要 %>
 <div class="item-show">
   <% @reserves.each do |reserve|%>
-  <div class="item-box">
-    <h2 class="name">
-      <%= reserve.item.item_name %>
-    </h2>
-    <div class="item-price-box">
-      <span class="item-price">
-       <%= reserve.customer.last_name %>様
-      </span>
-      <span class="item-price">
-        数量<%= reserve.quantity %>個
-      </span>
-      <span class="item-price">
-       メッセージ内容<br>
-       <%= reserve.message %>
-       <%= reserve.honorific %>
-      </span>
-      <span class="item-price">
-       <%= reserve.use_case %>
-      </span>
-      <span class="item-postage">
-        お渡し日時<%#= reserved date and time %>
-      </span>
-    </div>
+    <% if reserve.order.present? %>
+      <div class="item-box">
+        <h2 class="name">
+          <%= reserve.item.item_name %>
+        </h2>
+        <div class="item-price-box">
+          <span class="item-price">
+           <%= reserve.customer.last_name %>様
+          </span>
+          <span class="item-price">
+            数量<%= reserve.quantity %>個
+          </span>
+          <span class="item-price">
+           メッセージ内容<br>
+           <%= reserve.message %>
+           <%= reserve.honorific %>
+          </span>
+          <span class="item-price">
+           <%= reserve.use_case %>
+          </span>
+          <span class="item-postage">
+            お渡し日時
+            <%= reserve.order.request.visit_date %>
+            <%= reserve.order.request.visit_time.name %>
+          </span>
+        </div>
+    <% end %>
   <% end %>
       <div class="comment-box">
     <form>

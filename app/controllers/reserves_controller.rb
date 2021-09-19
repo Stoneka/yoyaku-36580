@@ -20,7 +20,7 @@ before_action :set_item, only: [:create]
   end
 
   def manage
-    @reserves = Reserve.includes(:customer, :item)
+    @reserves = Reserve.includes(:customer, :item, [order: :request])
     unless current_customer.admin?
       redirect_to root_path
     end
