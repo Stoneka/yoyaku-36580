@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     collection do
       get 'manage'
     end
-    resources :reserves , only: [:create, :destroy]
+    resources :reserves , only: [:create, :destroy] do
+      resources :orders , only: [:new, :create]
+    end
   end
   resources :carts , only: [:show]
   get 'reserve', to: 'reserves#manage'

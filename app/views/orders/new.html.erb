@@ -1,0 +1,103 @@
+<%= render "shared/second-header"%>
+<script type="text/javascript" src="https://js.pay.jp/v1/"></script>
+<div class='transaction-contents'>
+  <div class='transaction-main'>
+    <h1 class='transaction-title-text'>
+      予約内容の確認
+    </h1>
+    <%# 予約内容の表示 %>
+    <div class='buy-item-info'>
+      <%= image_tag @reserve.item.image, class: 'buy-item-img' %>
+      <div class='buy-item-right-content'>
+        <h2 class='buy-item-text'>
+          <%= @reserve.item.item_name %>
+        </h2>
+        <div class='buy-item-price'>
+          <p class='item-price-text'>¥<%= @reserve.item.price %></p>
+          <p class='item-price-sub-text'><%= @reserve.item.size.name %></p>
+        </div>
+      </div>
+    </div>
+    <%# /予約内容の表示 %>
+
+    <%# 支払額の表示 %>
+    <div class='item-payment'>
+      <h1 class='item-payment-title'>
+        支払金額
+      </h1>
+      <p class='item-payment-price'>
+        ¥<%= @reserve.item.price %>
+      </p>
+    </div>
+    <%# /支払額の表示 %>
+
+    <%= form_with model:@order_request, url:item_reserf_orders_path(@reserve.item_id, @reserve.id), id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+    <%= render 'shared/error_messages', model: f.object %>
+    <%# カード情報の入力 %>
+    <div class='credit-card-form'>
+      <h1 class='info-input-haedline'>
+        クレジットカード情報入力
+      </h1>
+      <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">カード情報</label>
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_field :number, class:"input-default", id:"card-number", placeholder:"カード番号(半角英数字)", maxlength:"16" %>
+        <div class='available-card'>
+          <%= image_tag 'card-visa.gif', class: 'card-logo'%>
+          <%= image_tag 'card-mastercard.gif', class: 'card-logo'%>
+          <%= image_tag 'card-jcb.gif', class: 'card-logo'%>
+          <%= image_tag 'card-amex.gif', class: 'card-logo'%>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">有効期限</label>
+          <span class="indispensable">必須</span>
+        </div>
+        <div class='input-expiration-date-wrap'>
+          <%= f.text_area :exp_month, class:"input-expiration-date", id:"card-exp-month", placeholder:"例)3" %>
+          <p>月</p>
+          <%= f.text_area :exp_year, class:"input-expiration-date", id:"card-exp-year", placeholder:"例)23" %>
+          <p>年</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">セキュリティコード</label>
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_field :cvc, class:"input-default", id:"card-cvc", placeholder:"カード背面4桁もしくは3桁の番号", maxlength:"4" %>
+      </div>
+    </div>
+    <%# /カード情報の入力 %>
+
+    <%# お受け取り日時の入力 %>
+    <div class='shipping-address-form'>
+      <h1 class='info-input-haedline'>
+        お受け取り日時の入力
+      </h1>
+      <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">お受け取り日</label>
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_field :visit_date, class:"input-default", id:"postal-code", placeholder:"2021/01/01", maxlength:"10" %>
+      </div>
+      <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">お受け取り時間</label>
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:visit_time_id, VisitTime.all, :id, :name, {}, {class:"select-box", id:"prefecture"}) %>
+      </div>
+    </div>
+    <%# /お受け取り日時の入力 %>
+    <div class='buy-btn'>
+      <%= f.submit "ご予約商品の購入確定" ,class:"buy-red-btn", id:"button" %>
+    </div>
+    <% end %>
+  </div>
+</div>
+<%= render "shared/second-footer"%>

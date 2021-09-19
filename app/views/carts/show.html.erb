@@ -34,7 +34,10 @@
             </div>
           </div>
           <h3 class='item-name'>
-            <%= link_to "予約を取り消す", item_reserf_path(reserve.item_id, reserve.id), method: :delete %>
+            <%= link_to "取り消す", item_reserf_path(reserve.item_id, reserve.id), method: :delete %>
+          </h3>
+          <h3 class='item-name'>
+            <%= link_to "購入画面に進む", new_item_reserf_order_path(reserve.item_id, reserve.id), method: :get %>
           </h3>
         </div>
         <%# end %>
