@@ -5,12 +5,10 @@ before_action :set_reserve, only: [:new,:create]
     @order_request = OrderRequest.new
   end
   def create
-    binding.pry
     @order_request = OrderRequest.new(order_request_params)
     if @order_request.valid?
       pay_item
       @order_request.save
-      return redirect_to root_path
     else
       render 'new'
     end
