@@ -80,10 +80,11 @@
       </h1>
       <div class="form-group">
         <div class='form-text-wrap'>
-          <label class="form-text">お受け取り日</label>
+          <label class="form-text">生年月日</label>
           <span class="indispensable">必須</span>
         </div>
-        <%= f.text_field :visit_date, class:"input-default", id:"postal-code", placeholder:"2021/01/01", maxlength:"10" %>
+
+        <%= f.select( :birthday, (1..11).to_a.map {|i| [(Time.now + i.days).strftime("%Y/%m/%d"), (Time.now + i.days).strftime("%m月%d日")]}, { include_blank: '--' }, {class:"select-box", id:"prefecture"}) %>
       </div>
       <div class="form-group">
         <div class='form-text-wrap'>
