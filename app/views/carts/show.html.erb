@@ -10,8 +10,8 @@
     <ul class='item-lists'>
       <% if @reserves.present? %>
       <% @reserves.each do |reserve| %>
+      <% if !reserve.order.present? %>
       <li class='list'>
-
         <%#= link_to item_path(reserve.item_id) do %>
         <div class='item-img-content'>
             <%= image_tag reserve.item.image, class: "item-img" %>
@@ -42,6 +42,7 @@
         </div>
         <%# end %>
       </li>
+      <% end %>
       <% end %>
       <% else %>
       <li class='list'>
