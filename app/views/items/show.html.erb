@@ -8,11 +8,6 @@
     </h2>
     <div class="item-img-content">
        <%= image_tag @item.image, class: "item-box-img" %>
-      <%# if @item.order.present? %>
-      <div class="sold-out">
-        <span>Sold Out!!</span>
-      </div>
-      <%# end %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -25,9 +20,7 @@
     <%# ユーザーのみ使用可能な機能 %>
     <% if customer_signed_in? && current_customer.admin? %>
     <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
-    <%#<p class="or-text">or</p>%>
     <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
-    <%# elsif customer_signed_in? %>
     <%#= link_to "購入画面に進む", item_orders_path(@item.id) ,class:"item-red-btn"%>
     <% end %>
 
@@ -128,27 +121,12 @@
         <%= f.label :use_case, "なし", {value: :"なし", style: "display: inline-block;"} %>
       </div>
     </div>
-    <%# /配送先の入力 %>
+    <%# /予約内容の入力 %>
     <div class='buy-btn'>
       <%= f.submit "カートへ入れる" ,class:"buy-red-btn", id:"button" %>
     </div>
   <% end %>
   <%# /予約フォーム %>
-
-  <div class="comment-box">
-    <form>
-      <textarea class="comment-text"></textarea>
-      <p class="comment-warn">
-        相手のことを考え丁寧なコメントを心がけましょう。
-        <br>
-        不快な言葉遣いなどは利用制限や退会処分となることがあります。
-      </p>
-      <button type="submit" class="comment-btn">
-        <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
-        <span>コメントする<span>
-      </button>
-    </form>
-  </div>
   <div class="links">
     <a href="#" class="change-item-btn">
       ＜ 前の商品

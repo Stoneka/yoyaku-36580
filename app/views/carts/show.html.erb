@@ -12,15 +12,8 @@
       <% @reserves.each do |reserve| %>
       <% if !reserve.order.present? %>
       <li class='list'>
-        <%#= link_to item_path(reserve.item_id) do %>
         <div class='item-img-content'>
             <%= image_tag reserve.item.image, class: "item-img" %>
-          <%# if item.order.present? %>
-          <div class='sold-out'>
-            <span>Sold Out!!</span>
-          </div>
-          <%# end %>
-
         </div>
         <div class='item-info'>
           <h3 class='item-name'>
@@ -40,7 +33,6 @@
             <%= link_to "購入画面に進む", new_item_reserf_order_path(reserve.item_id, reserve.id), method: :get %>
           </h3>
         </div>
-        <%# end %>
       </li>
       <% end %>
       <% end %>
