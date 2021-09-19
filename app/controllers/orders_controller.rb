@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
-before_action :set_reserve, only: [:new,:create]
+  before_action :authenticate_customer!, only: [:new, :create]
+  before_action :set_reserve, only: [:new,:create]
 
   def new
     @order_request = OrderRequest.new
