@@ -2,54 +2,40 @@
     <%= link_to "予約済商品一覧", "#", class: "item-red-btn" %>
 <%# 予約の概要 %>
 <div class="item-show">
+  <table class="reserve-plus">
+    <tbody>
+      <tr>
+        <th class="reserve-content1">お客様名</th>
+        <td class="reserve-content2">商品名</td>
+        <td class="reserve-content3">個数</td>
+        <td class="reserve-content4">メッセージ</td>
+        <td class="reserve-content5">敬称</td>
+        <td class="reserve-content6">用途</td>
+        <td class="reserve-content7">お渡し日</td>
+        <td class="reserve-content8">お渡し時間</td>
+      </tr>
+    </tbody>
+  </table>
   <% @reserves.each do |reserve|%>
-  <div class="item-box">
-    <h2 class="name">
-      <%= reserve.item.item_name %>
-    </h2>
-    <div class="item-price-box">
-      <span class="item-price">
-       <%= reserve.customer.last_name %>様
-      </span>
-      <span class="item-price">
-        数量<%= reserve.quantity %>個
-      </span>
-      <span class="item-price">
-       メッセージ内容<br>
-       <%= reserve.message %>
-       <%= reserve.honorific %>
-      </span>
-      <span class="item-price">
-       <%= reserve.use_case %>
-      </span>
-      <span class="item-postage">
-        お渡し日時<%#= reserved date and time %>
-      </span>
-    </div>
+    <% if reserve.id.present? %>
+      <table class="reserve-plus">
+        <tbody>
+          <tr>
+            <th class="reserve-content1"><%= reserve.reserve.customer.last_name %>様</th>
+            <td class="reserve-content2"><%= reserve.reserve.item.item_name %></td>
+            <td class="reserve-content3"><%= reserve.reserve.quantity %>個</td>
+            <td class="reserve-content4"><%= reserve.reserve.message %></td>
+            <td class="reserve-content5"><%= reserve.reserve.honorific %></td>
+            <td class="reserve-content6"><%= reserve.reserve.use_case %></td>
+            <td class="reserve-content7"><%= reserve.request.visit_date %></td>
+            <td class="reserve-content8"><%= reserve.request.visit_time.name %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
   <% end %>
-      <div class="comment-box">
-    <form>
-      <textarea class="comment-text"></textarea>
-      <p class="comment-warn">
-        相手のことを考え丁寧なコメントを心がけましょう。
-        <br>
-        不快な言葉遣いなどは利用制限や退会処分となることがあります。
-      </p>
-      <button type="submit" class="comment-btn">
-        <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
-        <span>コメントする<span>
-      </button>
-    </form>
-  </div>
-  <div class="links">
-    <a href="#" class="change-item-btn">
-      ＜ 前の商品
-    </a>
-    <a href="#" class="change-item-btn">
-      後ろの商品 ＞
-    </a>
-  </div>
-  <a href="#" class="another-item"><%#= @item.size.name%>をもっと見る</a>
 </div>
+
+
 
 <%= render "shared/footer" %>

@@ -1,4 +1,5 @@
 class CartsController < ApplicationController
+  before_action :authenticate_customer!, only: [:show]
   before_action :set_cart , only: :show
   def show
     @reserves = Reserve.where(cart_id: @cart.id)

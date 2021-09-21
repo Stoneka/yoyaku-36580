@@ -1,6 +1,6 @@
 class ReservesController < ApplicationController
-before_action :set_item, only: [:create]
-
+  before_action :authenticate_customer!, only: [:create, :destroy, :manage]
+  before_action :set_item, only: [:create]
   def create
     @reserve = CartReserve.new(reserve_params)
     if @reserve.valid?
@@ -20,10 +20,11 @@ before_action :set_item, only: [:create]
   end
 
   def manage
-    @reserves = Reserve.includes(:customer, :item)
     unless current_customer.admin?
       redirect_to root_path
     end
+    #お渡し日で並び替える前の記述メモ@reserves = Reserve.includes(:customer, :item, [order: :request])
+    @reserves = Order.includes(:request, [reserve: :item], [reserve: :customer]).order("requests.visit_date ASC")
   end
 
   private

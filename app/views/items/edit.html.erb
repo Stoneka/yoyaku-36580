@@ -52,15 +52,6 @@ app/assets/stylesheets/items/new.css %>
           <span class="indispensable">必須</span>
         </div>
         <%= f.collection_select(:size_id, Size.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
-        
-        
-        <%#<div class="weight-bold-text">%>
-        <%#  商品の状態%>
-        <%#  <span class="indispensable">必須</span>%>
-        <%#</div>%>
-        <%#<%= f.collection_select(:status_id, Status.all, :id, :name, {}, {class:"select-box", id:"item-sales-status"}) %>
-      
-      
       </div>
     </div>
     <%# /商品の詳細 %>
@@ -80,18 +71,6 @@ app/assets/stylesheets/items/new.css %>
           <span class="sell-yen">¥</span>
           <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300" %>
         </div>
-        <div class="price-content">
-          <span>販売手数料 (10%)</span>
-          <span>
-            <span id='add-tax-price'></span>円
-          </span>
-        </div>
-        <div class="price-content">
-          <span>販売利益</span>
-          <span>
-            <span id='profit'></span>円
-        </div>
-        </span>
       </div>
     </div>
     <%# /販売価格 %>
@@ -108,65 +87,45 @@ app/assets/stylesheets/items/new.css %>
             <span>エネルギー</span>
             <span class="indispensable">必須</span>
           </div>
-          <span class="sell-yen">¥</span>
-          <%= f.text_field :calorie, class:"price-input", id:"item-price", placeholder:"例）300" %>
+          <span class="sell-yen"></span>
+          <%= f.text_field :calorie, class:"price-input", id:"item-price", placeholder:"例）300" %>g
         </div>
         <div class="price-content">
           <div class="price-text">
             <span>たんぱく質</span>
             <span class="indispensable">必須</span>
           </div>
-          <span class="sell-yen">¥</span>
-          <%= f.text_field :protein, class:"price-input", id:"item-price", placeholder:"例）300" %>
+          <span class="sell-yen"></span>
+          <%= f.text_field :protein, class:"price-input", id:"item-price", placeholder:"例）300" %>g
         </div>
         <div class="price-content">
           <div class="price-text">
             <span>脂質</span>
             <span class="indispensable">必須</span>
           </div>
-          <span class="sell-yen">¥</span>
-          <%= f.text_field :fat, class:"price-input", id:"item-price", placeholder:"例）300" %>
+          <span class="sell-yen"></span>
+          <%= f.text_field :fat, class:"price-input", id:"item-price", placeholder:"例）300" %>g
         </div>
         <div class="price-content">
           <div class="price-text">
             <span>炭水化物</span>
             <span class="indispensable">必須</span>
           </div>
-          <span class="sell-yen">¥</span>
-          <%= f.text_field :carb, class:"price-input", id:"item-price", placeholder:"例）300" %>
+          <span class="sell-yen"></span>
+          <%= f.text_field :carb, class:"price-input", id:"item-price", placeholder:"例）300" %>g
         </div>
         <div class="price-content">
           <div class="price-text">
             <span>食塩相当量</span>
             <span class="indispensable">必須</span>
           </div>
-          <span class="sell-yen">¥</span>
-          <%= f.text_field :salt, class:"price-input", id:"item-price", placeholder:"例）300" %>
+          <span class="sell-yen"></span>
+          <%= f.text_field :salt, class:"price-input", id:"item-price", placeholder:"例）300" %>g
         </div>
 
       </div>
     </div>
     <%# /栄養成分表示 %>
-
-    <%# 注意書き %>
-    <div class="caution">
-      <p class="sentence">
-        <a href="#">禁止されている出品、</a>
-        <a href="#">行為</a>
-        を必ずご確認ください。
-      </p>
-      <p class="sentence">
-        またブランド品でシリアルナンバー等がある場合はご記載ください。
-        <a href="#">偽ブランドの販売</a>
-        は犯罪であり処罰される可能性があります。
-      </p>
-      <p class="sentence">
-        また、出品をもちまして
-        <a href="#">加盟店規約</a>
-        に同意したことになります。
-      </p>
-    </div>
-    <%# /注意書き %>
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
       <%= f.submit "変更する" ,class:"sell-btn" %>
@@ -178,9 +137,9 @@ app/assets/stylesheets/items/new.css %>
 
   <footer class="items-sell-footer">
     <ul class="menu">
-      <li><a href="#">プライバシーポリシー</a></li>
-      <li><a href="#">フリマ利用規約</a></li>
-      <li><a href="#">特定商取引に関する表記</a></li>
+      <li><a href="#"></a></li>
+      <li><a href="#"></a></li>
+      <li><a href="#"></a></li>
     </ul>
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
     <p class="inc">

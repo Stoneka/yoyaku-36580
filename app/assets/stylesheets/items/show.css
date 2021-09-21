@@ -2,39 +2,34 @@
 
 .item-show {
   background-color: #f8f8f8;
-  width: 100vw;
+  width: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5vh 0;
 }
 
 .item-box {
-  background-color: #FFF;
-  width: 70vw;
-  min-width: 1200px;
-  padding: 10vh 15vw;
+  width: 80vw;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: flex-start;
 }
 
 .item-box>.name {
   text-align: center;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 50px;
 }
 
 .item-box-img {
-  height: 50vh;
-  width: 60vw;
-  min-height: 500px;
+  height: 35vh;
+  width: 35vw;
   background-color: rgb(205, 202, 202);
   object-fit: contain;
   display: block;
 }
 
 .item-price-box {
+  background-color: #f8f8f8;
   margin: 25px 0px;
   display: flex;
   align-items: center;
@@ -75,6 +70,7 @@
 }
 
 .item-explain-box {
+  background-color: #f8f8f8;
   font-size: 18px;
   margin: 40px 0px;
   overflow-wrap: anywhere;
@@ -82,7 +78,8 @@
 
 .detail-table {
   margin-bottom: 30px;
-  width: 100%;
+  width: 40%;
+  height: 80%;
 }
 
 .detail-item {
@@ -94,8 +91,8 @@
 }
 
 .detail-value {
-  width: 80%;
-  padding: 20px;
+  background-color: #eee;
+  width: 30%;
   border: 1px solid #dedede;
   font-size: 14px;
 }
@@ -205,4 +202,78 @@
   text-decoration: none;
   font-weight: bold;
   font-size: 23px;
+}
+
+.item-img-content {
+  height: 100%;
+  width: 30%;
+}
+
+.form-plus {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+.form-plus2 {
+  display: flex;
+  justify-content: flex-start;
+  width: 180%;
+}
+.item-plus1 {
+  height: 50vh;
+  width: 80vw;
+  display: flex;
+  justify-content: flex-start;
+  background-color: #dedede;
+}
+.item-plus1>.item-img-content>.name {
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+}
+.item-price-box-plus {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.item-price-box-plus>.item-price {
+  font-size: 4vh;
+  font-weight: bold;
+  height: 30%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.item-price-box-plus>.item-postage {
+  font-size: 16px;
+  height: 35%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.detail-table-plus {
+  width: 40%;
+  height: 100%;
+}
+
+.detail-item-plus {
+  width: 20%;
+  background-color: #eee;
+  border: 1px solid #dedede;
+  font-size: 14px;
+  text-align: center;
+}
+
+.detail-value-plus {
+  background-color: #eee;
+  width: 30%;
+  border: 1px solid #dedede;
+  font-size: 14px;
+  text-align: center;
 }

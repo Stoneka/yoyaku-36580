@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :move_to_index, only:[:new, :create, :edit, :update, :destroy, :manage]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   def index
     @items = Item.all
@@ -40,9 +41,6 @@ class ItemsController < ApplicationController
 
   def manage
     @items = Item.all
-    unless current_customer.admin?
-      redirect_to root_path
-    end
   end
 
 
@@ -57,6 +55,12 @@ private
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def move_to_index
+    unless current_customer.admin?
+      redirect_to root_path
+    end
   end
 
 end

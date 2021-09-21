@@ -1,56 +1,33 @@
 <%= render "shared/header" %>
     <%= link_to "新規商品登録", new_item_path, class: "item-red-btn" %>
 <%# 商品の概要 %>
-<div class="item-show">
-  <% @items.each do |item|%>
-  <div class="item-box">
-    <h2 class="name">
-      <%= item.item_name %>
-    </h2>
-    <div class="item-img-content">
-       <%= image_tag item.image, class: "item-box-img" %>
-      <%# if @item.order.present? %>
-      <div class="sold-out">
-        <span>Sold Out!!</span>
+<% @items.each do |item|%>
+  <div class="item-manage-show">
+    <div class="item-manage-img">
+       <%= image_tag item.image %>
+    </div>
+    <table class="item-manage-content">
+      <tbody>
+        <tr>
+          <th class="item-manage-content1"><%= item.item_name %></th>
+        </tr>
+        <tr>
+          <th class="item-manage-content2"><%= item.price %>円</th>
+        </tr>
+        <tr>
+          <th class="item-manage-content3"><%= item.size.name %></th>
+        </tr>
+      </tbody>
+    </table>
+    <div class='item-manage-link'>
+      <div class='item-manage-link2'>
+        <%= link_to "商品の編集", edit_item_path(item.id), method: :get, class: "item-manage-link1" %>
       </div>
-      <%# end %>
+      <div class='item-manage-link2'>
+        <%= link_to "削除", item_path(item.id), method: :delete, class:"item-manage-link1" %>
+      </div>
     </div>
-    <div class="item-price-box">
-      <span class="item-price">
-       <%= item.price %>円
-      </span>
-      <span class="item-postage">
-        <%= item.size.name %>
-      </span>
-    </div>
-
-    <%= link_to "商品の編集", edit_item_path(item.id), method: :get, class: "item-red-btn" %>
-    <%= link_to "削除", item_path(item.id), method: :delete, class:"item-destroy" %>
-    <% end %>
-
-      <div class="comment-box">
-    <form>
-      <textarea class="comment-text"></textarea>
-      <p class="comment-warn">
-        相手のことを考え丁寧なコメントを心がけましょう。
-        <br>
-        不快な言葉遣いなどは利用制限や退会処分となることがあります。
-      </p>
-      <button type="submit" class="comment-btn">
-        <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
-        <span>コメントする<span>
-      </button>
-    </form>
   </div>
-  <div class="links">
-    <a href="#" class="change-item-btn">
-      ＜ 前の商品
-    </a>
-    <a href="#" class="change-item-btn">
-      後ろの商品 ＞
-    </a>
-  </div>
-  <a href="#" class="another-item"><%#= @item.size.name%>をもっと見る</a>
-</div>
+<% end %>
 
 <%= render "shared/footer" %>

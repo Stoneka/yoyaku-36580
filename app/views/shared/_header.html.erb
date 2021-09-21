@@ -1,27 +1,85 @@
 <%# CSS・・・assets/stylesheets/shared/header.css %>
-<header class='top-page-header'>
-  <div class='search-bar-contents'>
-    <%= link_to image_tag("furima-logo-color.png", class:"furima-icon"), "/" %>
-    <form class="search-form" action="#">
-      <input class='input-box' placeholder='キーワードから探す'>
-      <button class="search-button">
-        <%= image_tag "search.png", class:"search-icon" %>
-      </button>
-    </form>
-  </div>
-  <div class='nav'>
-    <ul class='lists-left'>
-      <li><%= link_to 'カテゴリー', "#", class: "category-list" %></li>
-      <li><%= link_to 'ブランド', "#", class: "brand-list" %></li>
-    </ul>
-    <ul class='lists-right'>
-      <% if customer_signed_in? %>
-        <li><%= link_to current_customer.last_name,"#", class: "user-nickname" %></li> 
-        <li><%= link_to 'ログアウト',destroy_customer_session_path, method: :delete, class: "logout" %></li> 
-      <% else %>
-        <li><%= link_to 'ログイン', new_customer_session_path, class: "login" %></li>
-        <li><%= link_to '会員登録', new_customer_registration_path, class: "sign-up" %></li>
-      <% end %>
-    </ul>
-  </div>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ここにサイト説明を入れます">
+<meta name="keywords" content="キーワード１,キーワード２,キーワード３,キーワード４,キーワード５">
+<link rel="stylesheet" href="app/assets/stylesheets/style.css">
+<link rel="stylesheet" href="app/assets/stylesheets/slide.css">
+<script src="/./javascript/openclose.js"></script>
+<script src="/./javascript/fixmenu_pagetop.js"></script>
+</head>
+<body>
+
+<div id="container">
+
+<header>
+
+<h1 id="logo"><%= link_to( root_path) do %><%= image_tag 'logo1.png' %><% end %></h1>
+<!--PC用（801px以上端末）メニュー-->
+<nav id="menubar"> 
+
+<ul>
+<% if customer_signed_in? %>
+<li class="current"><%= link_to( current_customer.last_name, "#") %></li>
+<li><%= link_to( "ログアウト", destroy_customer_session_path, method: :delete) %></li>
+<% else %>
+<li class="current"><%= link_to( "ログイン", new_customer_session_path) %></li>
+<li><%= link_to( "新規登録", new_customer_registration_path) %></li>
+<% end %>
+<%# カート機能 %>
+<% if customer_signed_in?%>
+<% if current_customer.cart.present? %>
+<li><%= link_to( "カート", cart_path(current_customer.cart)) %></li>
+<% else %>
+<li><%= link_to( "カート", "#") %></li>
+<% end %>
+<% end %>
+<%# /カート機能 %>
+<%# ユーザーのみ使用可能な機能%>
+<% if customer_signed_in? %>
+<% if current_customer.admin? %>
+<li><%= link_to( "商品管理", manage_items_path) %></li>
+<li><%= link_to( "予約管理", reserve_path) %></li>
+<% end %>
+<% end %>
+<%# /ユーザーのみ使用可能な機能%>
+</ul>
+
+</nav>
+<!--小さな端末用（800px以下端末）メニュー-->
+<nav id="menubar-s">
+
+<ul>
+<% if customer_signed_in? %>
+<li class="current"><%= link_to( current_customer.last_name, "#") %></li>
+<li><%= link_to( "ログアウト", destroy_customer_session_path) %></li>
+<% else %>
+<li class="current"><%= link_to( "ログイン", new_customer_session_path) %></li>
+<li><%= link_to( "新規登録", new_customer_registration_path) %></li>
+<% end %>
+<%# カート機能 %>
+<% if customer_signed_in?%>
+<% if current_customer.cart.present? %>
+<li><%= link_to( "カート", cart_path(current_customer.cart)) %></li>
+<% else %>
+<li><%= link_to( "カート", "#") %></li>
+<% end %>
+<% end %>
+<%# /カート機能 %>
+<%# ユーザーのみ使用可能な機能%>
+<% if customer_signed_in? %>
+<% if current_customer.admin? %>
+<li><%= link_to( "商品管理", manage_items_path) %></li>
+<li><%= link_to( "予約管理", reserve_path) %></li>
+<% end %>
+<% end %>
+<%# /ユーザーのみ使用可能な機能%>
+</ul>
+
+</nav>
+
 </header>

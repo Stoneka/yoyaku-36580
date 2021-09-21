@@ -1,0 +1,14 @@
+<%= render "shared/header" %>
+<div class='main'>
+  <%# 予約一覧 %>
+  <div class='order-complete'>
+    <h2 class='title'>ご注文は完了しました。</h2>
+      <%= link_to( "#", class: 'order-color') do %>
+      <h2>ご予約済商品ページへ</h2>
+      <% end %>
+      <%= link_to( root_path, class: 'order-color' ) do %>
+      <span>お買い物を続ける</span>
+      <% end %>
+  </div>
+</div>
+<%= render "shared/footer" %>
