@@ -24,7 +24,7 @@ class ReservesController < ApplicationController
       redirect_to root_path
     end
     #お渡し日で並び替える前の記述メモ@reserves = Reserve.includes(:customer, :item, [order: :request])
-    @reserves = Order.includes(:request, [reserve: :item], [reserve: :customer]).order("requests.visit_date ASC")
+    @reserves = Order.includes(:request, [reserve: :item], [reserve: :customer]).order("requests.visit_date ASC", "requests.visit_time_id ASC")
   end
 
   private
