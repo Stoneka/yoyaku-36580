@@ -20,12 +20,6 @@
     </span>
   </div>
 
-    <%# ユーザーのみ使用可能な機能 %>
-    <% if customer_signed_in? && current_customer.admin? %>
-      <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
-      <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
-    <% end %>
-
   <table class="detail-table-plus">
     <tbody>
       <tr>
@@ -56,6 +50,14 @@
   </table>
 </div>
 <%# /商品の概要 %>
+
+
+    <%# ユーザーのみ使用可能な機能 %>
+    <% if customer_signed_in? && current_customer.admin? %>
+      <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
+      <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
+    <% end %>
+    <%# /ユーザーのみ使用可能な機能 %>
 
   <%# 予約フォーム %>
   <%= form_with model:@reserve, url: item_reserves_path(@item.id), id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
