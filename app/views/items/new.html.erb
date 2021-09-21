@@ -1,9 +1,6 @@
-<div class="items-sell-contents">
-  <header class="items-sell-header">
-    <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
+<%= render "shared/header" %>
 
-  </header>
-  <div class="items-sell-main">
+  <div class="items-sell-main-plus">
     <h2 class="items-sell-title">商品の情報を入力</h2>
     <%= form_with model: @item , local: true do |f| %>
 
@@ -44,7 +41,7 @@
     <%# 商品の詳細 %>
     <div class="items-detail">
       <div class="weight-bold-text">商品の詳細</div>
-      <div class="form">
+      <div class="form-plus">
         <div class="weight-bold-text">
           サイズ
           <span class="indispensable">必須</span>
@@ -61,7 +58,7 @@
         <a class="question" href="#">?</a>
       </div>
       <div>
-        <div class="price-content">
+        <div class="price-content-plus">
           <div class="price-text">
             <span>価格</span>
             <span class="indispensable">必須</span>
@@ -81,7 +78,7 @@
         <a class="question" href="#">?</a>
       </div>
       <div>
-        <div class="price-content">
+        <div class="price-content-plus">
           <div class="price-text">
             <span>エネルギー</span>
             <span class="indispensable">必須</span>
@@ -89,7 +86,7 @@
           <span class="sell-yen"></span>
           <%= f.text_field :calorie, class:"price-input", id:"item-price", placeholder:"例）300" %>g
         </div>
-        <div class="price-content">
+        <div class="price-content-plus">
           <div class="price-text">
             <span>たんぱく質</span>
             <span class="indispensable">必須</span>
@@ -97,7 +94,7 @@
           <span class="sell-yen"></span>
           <%= f.text_field :protein, class:"price-input", id:"item-price", placeholder:"例）300" %>g
         </div>
-        <div class="price-content">
+        <div class="price-content-plus">
           <div class="price-text">
             <span>脂質</span>
             <span class="indispensable">必須</span>
@@ -105,7 +102,7 @@
           <span class="sell-yen"></span>
           <%= f.text_field :fat, class:"price-input", id:"item-price", placeholder:"例）300" %>g
         </div>
-        <div class="price-content">
+        <div class="price-content-plus">
           <div class="price-text">
             <span>炭水化物</span>
             <span class="indispensable">必須</span>
@@ -113,7 +110,7 @@
           <span class="sell-yen"></span>
           <%= f.text_field :carb, class:"price-input", id:"item-price", placeholder:"例）300" %>g
         </div>
-        <div class="price-content">
+        <div class="price-content-plus">
           <div class="price-text">
             <span>食塩相当量</span>
             <span class="indispensable">必須</span>
@@ -134,15 +131,5 @@
   </div>
   <% end %>
 
-  <footer class="items-sell-footer">
-    <ul class="menu">
-      <li><a href="#"></a></li>
-      <li><a href="#"></a></li>
-      <li><a href="#"></a></li>
-    </ul>
-    <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
-    <p class="inc">
-      ©︎Yoyaku,Inc.
-    </p>
-  </footer>
 </div>
+<%= render "shared/footer" %>
