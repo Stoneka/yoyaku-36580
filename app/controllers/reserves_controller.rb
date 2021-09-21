@@ -23,7 +23,8 @@ class ReservesController < ApplicationController
     unless current_customer.admin?
       redirect_to root_path
     end
-    @reserves = Reserve.includes(:customer, :item, [order: :request])
+    #お渡し日で並び替える前の記述メモ@reserves = Reserve.includes(:customer, :item, [order: :request])
+    @reserves = Order.includes(:request, [reserve: :item], [reserve: :customer]).order("requests.visit_date ASC")
   end
 
   private

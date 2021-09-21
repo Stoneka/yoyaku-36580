@@ -1,74 +1,61 @@
 <%= render "shared/header" %>
 
 <%# 商品の概要 %>
-<div class="item-show">
-  <div class="item-box">
+<div class="item-plus1">
+  <div class="item-img-content">
     <h2 class="name">
       <%= @item.item_name %>
     </h2>
-    <div class="item-img-content">
-       <%= image_tag @item.image, class: "item-box-img" %>
-    </div>
-    <div class="item-price-box">
-      <span class="item-price">
-       <%= @item.price %>円
-      </span>
-      <span class="item-postage">
-        <%= @item.size.name %>
-      </span>
-    </div>
+    <%= image_tag @item.image, class: "item-box-img" %>
+  </div>
+  <div class="item-price-box-plus">
+    <span class="item-price">
+     <%= @item.price %>円
+    </span>
+    <span class="item-postage">
+      <%= @item.size.name %>
+    </span>
+    <span class="item-postage">
+      <%= @item.explanation %>
+    </span>
+  </div>
+
     <%# ユーザーのみ使用可能な機能 %>
     <% if customer_signed_in? && current_customer.admin? %>
-    <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
-    <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
-    <%#= link_to "購入画面に進む", item_orders_path(@item.id) ,class:"item-red-btn"%>
+      <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
+      <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
     <% end %>
 
-
-    <div class="item-explain-box">
-      <span><%= @item.explanation %></span>
-    </div>
-
-    <div class="item-explain-box">
-      <span>栄養成分</span>
-    </div>
-
-    <table class="detail-table">
-      <tbody>
-        <tr>
-          <th class="detail-item">エネルギー</th>
-          <td class="detail-value"><%= @item.calorie %>kcal</td>
-        </tr>
-        <tr>
-          <th class="detail-item">たんぱく質</th>
-          <td class="detail-value"><%= @item.protein %>g</td>
-        </tr>
-        <tr>
-          <th class="detail-item">脂質</th>
-          <td class="detail-value"><%= @item.fat %>g</td>
-        </tr>
-        <tr>
-          <th class="detail-item">炭水化物</th>
-          <td class="detail-value"><%= @item.carb %>g</td>
-        </tr>
-        <tr>
-          <th class="detail-item">食塩相当量</th>
-          <td class="detail-value"><%= @item.salt %>g</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="option">
-      <div class="favorite-btn">
-        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
-        <span>お気に入り 0</span>
-      </div>
-      <div class="report-btn">
-        <%= image_tag "flag.png" ,class:"report-flag-icon" ,width:"20",height:"20"%>
-        <span>不適切な商品の通報</span>
-      </div>
-    </div>
-  </div>
-  <%# /商品の概要 %>
+  <table class="detail-table-plus">
+    <tbody>
+      <tr>
+        <th class="detail-item-plus">栄養成分</th>
+        <td class="detail-value-plus"></td>
+      </tr>
+      <tr>
+        <th class="detail-item-plus">エネルギー</th>
+        <td class="detail-value-plus"><%= @item.calorie %>kcal</td>
+      </tr>
+      <tr>
+        <th class="detail-item-plus">たんぱく質</th>
+        <td class="detail-value-plus"><%= @item.protein %>g</td>
+      </tr>
+      <tr>
+        <th class="detail-item-plus">脂質</th>
+        <td class="detail-value-plus"><%= @item.fat %>g</td>
+      </tr>
+      <tr>
+        <th class="detail-item-plus">炭水化物</th>
+        <td class="detail-value-plus"><%= @item.carb %>g</td>
+      </tr>
+      <tr>
+        <th class="detail-item-plus">食塩相当量</th>
+        <td class="detail-value-plus"><%= @item.salt %>g</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<%# /商品の概要 %>
 
   <%# 予約フォーム %>
   <%= form_with model:@reserve, url: item_reserves_path(@item.id), id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
@@ -83,20 +70,21 @@
           <label class="form-text">数量</label>
           <span class="indispensable">必須</span>
         </div>
-        <%= f.text_field :quantity, class:"input-default", id:"quantity", placeholder:"例）123-4567", maxlength:"8" %>
+        <%= f.text_field :quantity, class:"input-default", id:"quantity", placeholder:"例）1", maxlength:"8" %>
       </div>
       <div class="form-group">
         <div class='form-text-wrap'>
           <label class="form-text">メッセージ</label>
           <span class="indispensable">必須</span>
         </div>
-        <%= f.text_field :message, class:"input-default", id:"message", placeholder:"例）横浜市緑区"%>
+        <%= f.text_field :message, class:"input-default", id:"message", placeholder:"例）リクタロウ"%>
       </div>
-      <div class="form-group">
+      <div class="form-plus">
         <div class='form-text-wrap'>
           <label class="form-text">敬称</label>
           <span class="indispensable">必須</span>
         </div>
+        <div class='form-plus2'>
         <%= f.radio_button :honorific, :"さん" %>
         <%= f.label :honorific, "さん", {value: :"さん", style: "display: inline-block;"} %>
         <%= f.radio_button :honorific, :"ちゃん" %>
@@ -105,12 +93,14 @@
         <%= f.label :honorific, "くん", {value: :"くん", style: "display: inline-block;"} %>
         <%= f.radio_button :honorific, :"なし" %>
         <%= f.label :honorific, "なし", {value: :"なし", style: "display: inline-block;"} %>
+        </div>
       </div>
-      <div class="form-group">
+      <div class="form-plus">
         <div class='form-text-wrap'>
           <label class="form-text">タイトル</label>
           <span class="indispensable">必須</span>
         </div>
+        <div class='form-plus2'>
         <%= f.radio_button :use_case, :"お誕生日おめでとう" %>
         <%= f.label :use_case, "お誕生日おめでとう", {value: :"お誕生日おめでとう", style: "display: inline-block;"} %>
         <%= f.radio_button :use_case, :"HappyBirthday" %>
@@ -119,6 +109,7 @@
         <%= f.label :use_case, "祝", {value: :"祝", style: "display: inline-block;"} %>
         <%= f.radio_button :use_case, :"なし" %>
         <%= f.label :use_case, "なし", {value: :"なし", style: "display: inline-block;"} %>
+        </div>
       </div>
     </div>
     <%# /予約内容の入力 %>
@@ -127,15 +118,7 @@
     </div>
   <% end %>
   <%# /予約フォーム %>
-  <div class="links">
-    <a href="#" class="change-item-btn">
-      ＜ 前の商品
-    </a>
-    <a href="#" class="change-item-btn">
-      後ろの商品 ＞
-    </a>
-  </div>
-  <a href="#" class="another-item"><%= @item.size.name%>をもっと見る</a>
+
 </div>
 
 <%= render "shared/footer" %>
