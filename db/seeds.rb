@@ -13,7 +13,7 @@ cart = Cart.new(
   customer_id: customer.id)
 cart.save!
 
-customer = Customer.create!(
+test_customer1 = Customer.create!(
   email: "test1@test"     ,
   password: "00000a"          ,
   password_confirmation: "00000a",
@@ -24,11 +24,11 @@ customer = Customer.create!(
   birthday: "1930-01-01"       ,
   phone: "12345678901"         ,
   admin: false)
-cart = Cart.new(
-  customer_id: customer.id)
-cart.save!
+test_cart1 = Cart.new(
+  customer_id: test_customer1.id)
+test_cart1.save!
 
-customer = Customer.create!(
+test_customer2 = Customer.create!(
   email: "test2@test"     ,
   password: "00000a"          ,
   password_confirmation: "00000a",
@@ -39,11 +39,11 @@ customer = Customer.create!(
   birthday: "1930-01-01"       ,
   phone: "12345678901"         ,
   admin: false)
-cart = Cart.new(
-  customer_id: customer.id)
-cart.save!
+test_cart2 = Cart.new(
+  customer_id: test_customer2.id)
+test_cart2.save!
 
-item = Item.new(
+item3 = Item.new(
   id: "3",
   item_name: "イチゴのタルト",
   explanation: "イチゴを使ったタルトです",
@@ -54,10 +54,10 @@ item = Item.new(
   fat: "2000",
   salt: "150",
   carb: "250")
-item.image.attach(io: File.open('app/assets/images/cake_4.jpg'), filename: 'cake_4.jpg')
-item.save!
+item3.image.attach(io: File.open('app/assets/images/cake_4.jpg'), filename: 'cake_4.jpg')
+item3.save!
 
-item = Item.new(
+item1 = Item.new(
   id: "1",
   item_name: "シャルロット",
   explanation: "イチゴを使ったシャルロットケーキです",
@@ -68,10 +68,10 @@ item = Item.new(
   fat: "2000",
   salt: "150",
   carb: "250")
-item.image.attach(io: File.open('app/assets/images/cake_7.jpg'), filename: 'cake_7.jpg')
-item.save!
+item1.image.attach(io: File.open('app/assets/images/cake_7.jpg'), filename: 'cake_7.jpg')
+item1.save!
 
-item = Item.new(
+item2 = Item.new(
   id: "2",
   item_name: "ホワイトケーキ",
   explanation: "スポンジにフォンダンをかけました",
@@ -82,10 +82,10 @@ item = Item.new(
   fat: "2000",
   salt: "150",
   carb: "250")
-item.image.attach(io: File.open('app/assets/images/cake_2.jpg'), filename: 'cake_2.jpg')
-item.save!
+item2.image.attach(io: File.open('app/assets/images/cake_2.jpg'), filename: 'cake_2.jpg')
+item2.save!
 
-item = Item.new(
+item4 = Item.new(
   id: "4",
   item_name: "イチゴのムース",
   explanation: "イチゴのムースを使ったケーキです",
@@ -96,10 +96,10 @@ item = Item.new(
   fat: "2000",
   salt: "150",
   carb: "250")
-item.image.attach(io: File.open('app/assets/images/cake_3.jpg'), filename: 'cake_3.jpg')
-item.save!
+item4.image.attach(io: File.open('app/assets/images/cake_3.jpg'), filename: 'cake_3.jpg')
+item4.save!
 
-item = Item.new(
+item5 = Item.new(
   id: "5",
   item_name: "イチゴのケーキ（小さめ）",
   explanation: "イチゴを使った小さめのケーキです",
@@ -110,10 +110,10 @@ item = Item.new(
   fat: "2000",
   salt: "150",
   carb: "250")
-item.image.attach(io: File.open('app/assets/images/cake_6.jpg'), filename: 'cake_6.jpg')
-item.save!
+item5.image.attach(io: File.open('app/assets/images/cake_6.jpg'), filename: 'cake_6.jpg')
+item5.save!
 
-item = Item.new(
+item6 = Item.new(
   id: "6",
   item_name: "イチゴのホワイトチョコケーキ",
   explanation: "イチゴとホワイトチョコのケーキです",
@@ -124,21 +124,23 @@ item = Item.new(
   fat: "3500",
   salt: "150",
   carb: "250")
-item.image.attach(io: File.open('app/assets/images/cake_8.png'), filename: 'cake_8.png')
-item.save!
+item6.image.attach(io: File.open('app/assets/images/cake_8.png'), filename: 'cake_8.png')
+item6.save!
 
 honorific_ary = ["ちゃん", "くん", "さん", "なし"]
 use_case_ary = ["お誕生日おめでとう", "HappyBirthday", "祝", "なし"]
+item_ary = [item1.id, item2.id, item3.id, item4.id, item5.id, item6.id]
 10.times do 
   num = Faker::Number.between(from: 0, to: 3)
+  number = Faker::Number.between(from: 0, to: 5)
   reserve = Reserve.create!(
     quantity: 1,
     message: Faker::Name.unique.last_name,
     honorific: honorific_ary[num],
     use_case: use_case_ary[num],
-    customer_id: 3,
-    item_id: Faker::Number.between(from: 1, to: 6),
-    cart_id: 3)
+    customer_id: test_customer1.id,
+    item_id: item_ary[number],
+    cart_id: test_cart1.id)
 
   order = Order.create!(
     reserve_id: reserve.id)
@@ -154,14 +156,15 @@ end
 
 10.times do 
   num = Faker::Number.between(from: 0, to: 3)
+  number = Faker::Number.between(from: 0, to: 5)
   reserve = Reserve.create!(
     quantity: 1,
     message: Faker::Name.unique.last_name,
     honorific: honorific_ary[num],
     use_case: use_case_ary[num],
-    customer_id: 2,
-    item_id: Faker::Number.between(from: 1, to: 6),
-    cart_id: 2)
+    customer_id: test_customer2.id,
+    item_id: item_ary[number],
+    cart_id: test_cart2.id)
 
   order = Order.create!(
     reserve_id: reserve.id)
