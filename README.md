@@ -62,11 +62,11 @@ Basic認証
 | クレジットカード決済  | カスタマーがクレジットカードで商品を購入 |
 
 # 仕様
-## macOS BigSur11.4
-## Ruby 2.6.5
-## Ruby on Rails 6.0.4.
-## Heroku
-## PAY.JP
+- macOS BigSur11.4
+- Ruby 2.6.5
+- Ruby on Rails 6.0.4.
+- Heroku
+- PAY.JP
 
 # テーブル設計
 
