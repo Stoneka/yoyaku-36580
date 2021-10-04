@@ -55,10 +55,8 @@
   </div>
   <%# /予約一覧 %>
 
-  <div>
-    <%= link_to( root_path) do %>
-    <span class="item-red-btn">お買い物を続ける</span>
-    <% end %>
+  <div class="submit">
+    <%= link_to "お買い物を続ける", root_path , class: "buy-red-button" ,id: "button"%>
   </div>
 </div>
 <%= render "shared/footer" %>
