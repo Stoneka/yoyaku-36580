@@ -46,3 +46,21 @@ background-color: #FFF;
 .item-name-cart-color{
   color:black;
 }
+
+.cart_button{
+  height:15vh;
+  display:flex;
+  justify-content: center;
+}
+
+.cart_button_type{
+	padding: 10px 30px;	/*ボタン内の余白*/
+	margin-bottom: 20px;
+	border: none;
+	border-radius: 30px;	/*角丸のサイズ*/
+	background: linear-gradient(#fff, #eee);	/*グラデーション*/
+	font-size: 16px;	/*文字サイズ*/
+	border: 1px solid #ccc;
+  color:black;
+  height:100%;
+}
