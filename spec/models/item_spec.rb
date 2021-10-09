@@ -52,84 +52,183 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
     end
-=begin
+    
     context '商品の出品ができないとき' do
-      it 'imagesが空では登録できない' do
-        @item.images = nil
+      it 'imageが空では登録できない' do
+        @item.image = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("商品画像を入力してください")
+        expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       it 'item_nameが空では登録できない' do
         @item.item_name = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("商品名を入力してください")
+        expect(@item.errors.full_messages).to include("Item name can't be blank")
       end
       it 'explanationが空では登録できない' do
         @item.explanation = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("商品の説明を入力してください")
+        expect(@item.errors.full_messages).to include("Explanation can't be blank")
       end
-      it 'category_idが初期値では登録できない' do
-        @item.category_id = 1
+      it 'size_idが初期値では登録できない' do
+        @item.size_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("カテゴリーを入力してください")
-      end
-      it 'status_idが初期値では登録できない' do
-        @item.status_id = 1
-        @item.valid?
-        expect(@item.errors.full_messages).to include("商品の状態を入力してください")
-      end
-      it 'burden_method_idが初期値では登録できない' do
-        @item.burden_method_id = 1
-        @item.valid?
-        expect(@item.errors.full_messages).to include("配送料の負担を入力してください")
-      end
-      it 'shipment_source_idが初期値では登録できない' do
-        @item.shipment_source_id = 1
-        @item.valid?
-        expect(@item.errors.full_messages).to include("発送元の地域を入力してください")
-      end
-      it 'shipping_days_idが初期値では登録できない' do
-        @item.shipping_days_id = 1
-        @item.valid?
-        expect(@item.errors.full_messages).to include("発送までの日数を入力してください")
+        expect(@item.errors.full_messages).to include("Size must be other than 1")
       end
       it 'priceが空では登録できない' do
         @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include('販売価格は数値で入力してください')
+        expect(@item.errors.full_messages).to include("Price can't be blank")
       end
-      it 'priceが300未満の値では登録できない' do
-        @item.price = 299
+      it 'priceが1未満の値では登録できない' do
+        @item.price = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include('販売価格は300以上の値にしてください')
+        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 1")
       end
-      it 'priceが9,999,999を超える値では登録できない' do
-        @item.price = 10_000_000
+      it 'priceが99,999を超える値では登録できない' do
+        @item.price = 100_000
         @item.valid?
-        expect(@item.errors.full_messages).to include('販売価格は9999999以下の値にしてください')
+        expect(@item.errors.full_messages).to include("Price must be less than or equal to 99999")
       end
       it 'priceが全角数字では登録できない' do
-        @item.price = '３００'
+        @item.price = '１'
         @item.valid?
-        expect(@item.errors.full_messages).to include('販売価格は数値で入力してください')
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
       it 'priceが半角英数字混合では登録できない' do
         @item.price = 'ab12'
         @item.valid?
-        expect(@item.errors.full_messages).to include('販売価格は数値で入力してください')
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
       it 'priceが半角英字では登録できない' do
         @item.price = 'abcd'
         @item.valid?
-        expect(@item.errors.full_messages).to include('販売価格は数値で入力してください')
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
-      it 'userが紐づいていなければ登録できない' do
-        @item.user = nil
+      it 'calorieが0未満の値では登録できない' do
+        @item.calorie = -1
         @item.valid?
-        expect(@item.errors.full_messages).to include('ユーザーを入力してください')
+        expect(@item.errors.full_messages).to include("Calorie must be greater than or equal to 0")
+      end
+      it 'calorieが9,999を超える値では登録できない' do
+        @item.calorie = 10_000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Calorie must be less than or equal to 9999")
+      end
+      it 'calorieが全角数字では登録できない' do
+        @item.calorie = '１'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Calorie is not a number")
+      end
+      it 'calorieが半角英数字混合では登録できない' do
+        @item.calorie = 'ab12'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Calorie is not a number")
+      end
+      it 'calorieが半角英字では登録できない' do
+        @item.calorie = 'abcd'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Calorie is not a number")
+      end
+      it 'proteinが0未満の値では登録できない' do
+        @item.protein = -1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Protein must be greater than or equal to 0")
+      end
+      it 'proteinが9,999を超える値では登録できない' do
+        @item.protein = 10_000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Protein must be less than or equal to 9999")
+      end
+      it 'proteinが全角数字では登録できない' do
+        @item.protein = '１'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Protein is not a number")
+      end
+      it 'proteinが半角英数字混合では登録できない' do
+        @item.protein = 'ab12'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Protein is not a number")
+      end
+      it 'proteinが半角英字では登録できない' do
+        @item.protein = 'abcd'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Protein is not a number")
+      end
+      it 'fatが0未満の値では登録できない' do
+        @item.fat = -1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Fat must be greater than or equal to 0")
+      end
+      it 'fatが9,999を超える値では登録できない' do
+        @item.fat = 10_000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Fat must be less than or equal to 9999")
+      end
+      it 'fatが全角数字では登録できない' do
+        @item.fat = '１'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Fat is not a number")
+      end
+      it 'fatが半角英数字混合では登録できない' do
+        @item.fat = 'ab12'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Fat is not a number")
+      end
+      it 'fatが半角英字では登録できない' do
+        @item.fat = 'abcd'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Fat is not a number")
+      end
+      it 'saltが0未満の値では登録できない' do
+        @item.salt = -1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Salt must be greater than or equal to 0")
+      end
+      it 'saltが9,999を超える値では登録できない' do
+        @item.salt = 10_000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Salt must be less than or equal to 9999")
+      end
+      it 'saltが全角数字では登録できない' do
+        @item.salt = '１'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Salt is not a number")
+      end
+      it 'saltが半角英数字混合では登録できない' do
+        @item.salt = 'ab12'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Salt is not a number")
+      end
+      it 'saltが半角英字では登録できない' do
+        @item.salt = 'abcd'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Salt is not a number")
+      end
+      it 'carbが0未満の値では登録できない' do
+        @item.carb = -1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Carb must be greater than or equal to 0")
+      end
+      it 'carbが9,999を超える値では登録できない' do
+        @item.carb = 10_000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Carb must be less than or equal to 9999")
+      end
+      it 'carbが全角数字では登録できない' do
+        @item.carb = '１'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Carb is not a number")
+      end
+      it 'carbが半角英数字混合では登録できない' do
+        @item.carb = 'ab12'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Carb is not a number")
+      end
+      it 'carbが半角英字では登録できない' do
+        @item.carb = 'abcd'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Carb is not a number")
       end
     end
-=end
   end
 end
