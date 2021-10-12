@@ -4,6 +4,7 @@ RSpec.describe Request, type: :model do
   before do
     @request = FactoryBot.build(:request)
   end
+=begin
   describe '来店日時の登録' do
     context '来店日時の登録ができるとき' do
       it 'visit_date,visit_time_idが存在すれば登録できる' do
@@ -18,14 +19,24 @@ RSpec.describe Request, type: :model do
         expect(@request).to be_valid
       end
     end
-=begin
     context '来店日時の登録ができないとき' do
-      it 'orderが紐づいていなければ登録できない' do
-        @request.customer = nil
+      it 'visit_dateが空では登録できない' do
+        @request.visit_date = ""
         @request.valid?
-        expect(@request.errors.full_messages).to include('Customer must exist')
+        expect(@request.errors.full_messages).to include("Visit date can't be blank")
+      end
+      it 'visit_time_idが初期値では登録できない' do
+        @request.visit_time_id = 1
+        @request.valid?
+        expect(@request.errors.full_messages).to include("Visit time id must be other than 1")
+      end
+      it 'orderが紐づいていなければ登録できない' do
+        @request.order = nil
+        @request.valid?
+        expect(@request.errors.full_messages).to include('Order must exist')
       end
     end
-=end
   end
+#orderモデル単体テスト記述後にコメントアウト外す
+=end
 end
