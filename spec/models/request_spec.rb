@@ -5,6 +5,8 @@ RSpec.describe Request, type: :model do
     @request = FactoryBot.build(:request)
   end
 =begin
+  pending "add some examples to (or delete) #{__FILE__}"
+
   describe '来店日時の登録' do
     context '来店日時の登録ができるとき' do
       it 'visit_date,visit_time_idが存在すれば登録できる' do
