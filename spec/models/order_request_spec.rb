@@ -25,6 +25,28 @@ RSpec.describe OrderRequest, type: :model do
         expect(@order_request).to be_valid
       end
     end
+    context '商品の購入ができないとき' do
+      it 'visit_dateが空では登録できない' do
+        @order_request.visit_date = ''
+        @order_request.valid?
+        expect(@order_request.errors.full_messages).to include("Visit date can't be blank")
+      end
+      it 'visit_time_idが初期値では登録できない' do
+        @order_request.visit_time_id = 1
+        @order_request.valid?
+        expect(@order_request.errors.full_messages).to include("Visit time を入力してください")
+      end
+      it 'tokenが空では登録できない' do
+        @order_request.token = ''
+        @order_request.valid?
+        expect(@order_request.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'reserve_idが紐づいていなければ登録できない' do
+        @order_request.reserve_id = nil
+        @order_request.valid?
+        expect(@order_request.errors.full_messages).to include("Reserve can't be blank")
+      end
+    end
   end
 end
 
