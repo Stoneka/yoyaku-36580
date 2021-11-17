@@ -54,7 +54,7 @@ RSpec.describe "顧客情報管理機能", type: :system do
     ##fill_in 'first-name', with: ""
     ##fill_in 'last-name-kana', with: ""
     ##fill_in 'first-name-kana', with: ""
-    ##fill_in 'phone-number', with: ""
+    ##fill_in 'phone-number', with: ""
     ##fill_in 'customer_birthday_1i', with: ""
     ##fill_in 'customer_birthday_2i', with: ""
     ##fill_in 'customer_birthday_3i', with: ""
