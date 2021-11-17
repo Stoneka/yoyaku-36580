@@ -21,9 +21,9 @@ RSpec.describe "顧客情報管理機能", type: :system do
     fill_in 'last-name-kana', with: @customer.last_name_kana
     fill_in 'first-name-kana', with: @customer.first_name_kana
     fill_in 'phone-number', with: @customer.phone
-    fill_in 'customer_birthday_1i', with: 1930
-    fill_in 'customer_birthday_2i', with: 1
-    fill_in 'customer_birthday_3i', with: 1
+    select '1930', from:'customer_birthday_1i' 
+    select '1', from:'customer_birthday_2i'
+    select '1', from:'customer_birthday_3i'
     #新規登録ボタンを押すとカスタマーモデルのカウントが1上がることを確認する
     expect{
       find('input[name="commit"]').click
@@ -47,24 +47,23 @@ RSpec.describe "顧客情報管理機能", type: :system do
     #新規登録ページへ移動する
     visit new_customer_registration_path
     #カスタマー情報を入力する
-    ##fill_in 'email', with: ""
-    ##fill_in 'password', with: ""
-    ##fill_in 'password-confirmation', with: ""
-    ##fill_in 'last-name', with: ""
-    ##fill_in 'first-name', with: ""
-    ##fill_in 'last-name-kana', with: ""
-    ##fill_in 'first-name-kana', with: ""
-    ##fill_in 'phone-number', with: ""
-    ##fill_in 'customer_birthday_1i', with: ""
-    ##fill_in 'customer_birthday_2i', with: ""
-    ##fill_in 'customer_birthday_3i', with: ""
+    fill_in 'email', with: ""
+    fill_in 'password', with: ""
+    fill_in 'password-confirmation', with: ""
+    fill_in 'last-name', with: ""
+    fill_in 'first-name', with: ""
+    fill_in 'last-name-kana', with: ""
+    fill_in 'first-name-kana', with: ""
+    fill_in 'phone-number', with: ""
+    select '--', from:'customer_birthday_1i' 
+    select '--', from:'customer_birthday_2i'
+    select '--', from:'customer_birthday_3i'
     #新規登録ボタンを押してもカスタマーモデルのカウントが上がらないことを確認する
     expect{
       find('input[name="commit"]').click
     }.to change { Customer.count }.by(0)
     #新規登録ページへ戻されることを確認する
-    expect(current_path).to eq new_customer_registration_path
+    expect(current_path).to eq customer_registration_path
     end
-    #syntax_error要改善
   end
 end
