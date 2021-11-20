@@ -3,12 +3,17 @@ require 'rails_helper'
 RSpec.describe "Items", type: :system do
   before do
     @item = FactoryBot.build(:item)
-    #@customer = FactoryBot.build(:customer)
+    @customer = FactoryBot.build(:customer)
   end
 #商品管理機能の結合テストコード記述
 context '商品の新規登録ができるとき' do
   it '正しい情報を入力すれば商品の新規登録ができる' do
-    #管理者アカウトを事前にデータベースに保存しておく必要あり
+    #管理者アカウトを事前にデータベースに保存する
+    @customer.email = 'user@master.jp'
+    @customer.password = '00000a'
+    @customer.password_confirmation = @customer.password
+    @customer.admin = '1'
+    #管理者アカウントのデータがうまく登録できていない
     ####トップページに移動する
     ###visit root_path
     ####トップページに新規登録ページに遷移するボタンがあることを確認する
