@@ -3,16 +3,16 @@ require 'rails_helper'
 RSpec.describe "Items", type: :system do
   before do
     @item = FactoryBot.build(:item)
-    @customer = FactoryBot.build(:customer)
+    @user_master = FactoryBot.create(:user_master)
   end
 #商品管理機能の結合テストコード記述
 context '商品の新規登録ができるとき' do
   it '正しい情報を入力すれば商品の新規登録ができる' do
     #管理者アカウトを事前にデータベースに保存する
-    @customer.email = 'user@master.jp'
-    @customer.password = '00000a'
-    @customer.password_confirmation = @customer.password
-    @customer.admin = '1'
+    #@customer.email = 'user@master.jp'
+    #@customer.password = '00000a'
+    #@customer.password_confirmation = @customer.password
+    #@customer.admin = '1'
     #管理者アカウントのデータがうまく登録できていない
     ####トップページに移動する
     ###visit root_path
@@ -64,16 +64,18 @@ context '商品の新規登録ができるとき' do
      #新規商品登録画面に移動する
      visit new_item_path
      #商品情報を入力する
-     fill_in 'image', with: @item.image
-     fill_in 'item_name', with: @item.item_name
-     fill_in 'explanation', with: @item.explanation
-     select '4号サイズ(直径12cm)', from:size_id
-     fill_in 'price', with: @item.price
-     fill_in 'calorie', with: @item.calorie
-     fill_in 'protain', with: @item.protain
-     fill_in 'fat', with: @item.fat
-     fill_in 'carb', with: @item.carb
-     fill_in 'salt', with: @item.salt
+     ### InvalidArgumentError 画像アップロードのエラー解決が必要
+     #find('input[type="file"]').click
+     #attach_file "image[]", "app/assets/images/cake_1.jpg"
+     fill_in 'item-name', with: @item.item_name
+     fill_in 'item-info', with: @item.explanation
+     select '4号サイズ(直径12cm)', from: 'item-category'
+     fill_in 'item[price]', with: @item.price
+     fill_in 'item[calorie]', with: @item.calorie
+     fill_in 'item[protein]', with: @item.protein
+     fill_in 'item[fat]', with: @item.fat
+     fill_in 'item[carb]', with: @item.carb
+     fill_in 'item[salt]', with: @item.salt
      #商品を登録するボタンを押すとアイテムモデルのカウントが1上がることを確認する
      expect{
        find('input[name="commit"]').click
