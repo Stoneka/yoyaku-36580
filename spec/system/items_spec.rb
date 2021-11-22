@@ -64,9 +64,7 @@ context '商品の新規登録ができるとき' do
      #新規商品登録画面に移動する
      visit new_item_path
      #商品情報を入力する
-     ### InvalidArgumentError 画像アップロードのエラー解決が必要
-     #find('input[type="file"]').click
-     #attach_file "image[]", "app/assets/images/cake_1.jpg"
+     attach_file "item_image_id", "app/assets/images/cake_1.jpg"
      fill_in 'item-name', with: @item.item_name
      fill_in 'item-info', with: @item.explanation
      select '4号サイズ(直径12cm)', from: 'item-category'
