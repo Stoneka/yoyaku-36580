@@ -49,6 +49,34 @@ RSpec.describe "Items", type: :system do
       #新たに登録した商品が表示されていることを確認する
       expect(page).to have_content(@item.item_name)
     end
+    it '既に商品が登録されていれば商品管理ページに登録されている商品が表示される'
+      #トップページに移動する
+      visit root_path
+      #トップページにログインボタンが表示されていることを確認する
+      expect(page).to have_content('ログイン')
+      #ログインページへ移動する
+      visit new_customer_session_path
+      #管理者でログインする
+      fill_in 'email', with: 'user@master.jp'
+      fill_in 'password', with: '00000a'
+      find('input[name="commit"]').click
+      #トップページに遷移したことを確認する
+      expect(current_path).to eq(root_path)
+      #トップページに商品管理ボタンが表示されていることを確認する
+      expect(page).to have_content('商品管理')
+      #商品管理ページへ移動する
+      visit manage_items_path
+      #商品を編集するボタンがあることを確認する
+      #商品を編集するボタンを押すと商品編集画面に移動する
+      #編集する商品情報を入力する
+      #トップページへ遷移したことを確認する
+      #商品管理ページへ移動する
+      #編集した商品が表示されていることを確認する
+    end
+    it '既に商品が登録されていれば商品管理ページから商品情報を編集することができる'
+    end
+    it '既に商品が登録されていれば商品管理ページから商品情報を削除することができる'
+    end
   end
   context '商品の新規登録ができないとき' do
     it '誤った情報を入力すれば商品の新規登録ができず新規登録ページに移動する' do
