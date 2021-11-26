@@ -109,6 +109,40 @@ RSpec.describe "Items", type: :system do
       expect(page).to have_content('編集後の商品名')
     end
     it '既に商品が登録されていれば商品管理ページから商品情報を削除することができる' do
+      #事前に商品を登録する
+      @item = FactoryBot.create(:item)
+      #トップページに移動する
+      visit root_path
+      #トップページにログインボタンが表示されていることを確認する
+      expect(page).to have_content('ログイン')
+      #ログインページへ移動する
+      visit new_customer_session_path
+      #管理者でログインする
+      fill_in 'email', with: 'user@master.jp'
+      fill_in 'password', with: '00000a'
+      find('input[name="commit"]').click
+      #トップページに遷移したことを確認する
+      expect(current_path).to eq(root_path)
+      #トップページに商品管理ボタンが表示されていることを確認する
+      expect(page).to have_content('商品管理')
+      #商品管理ページへ移動する
+      visit manage_items_path
+      #商品が表示されていることを確認する
+      expect(page).to have_content(@item.item_name)
+      #削除ボタンがあることを確認する
+      expect(page).to have_content('削除')
+      #削除ボタンを押すと商品が削除されレコードの数が1減ることを確認する
+      expect{
+        page.find_link('削除', href: item_path(@item.id)).click
+      }.to change { Item.count }.by(-1)
+      ##トップページに移動する
+      #visit root_path
+      #トップページへ遷移したことを確認する
+      expect(current_path).to eq(root_path)
+      #商品管理ページへ移動する
+      visit manage_items_path
+      #削除した商品が表示されていないことを確認する
+      expect(page).to have_no_content(@item.item_name)
     end
   end
   context '商品の新規登録ができないとき' do
