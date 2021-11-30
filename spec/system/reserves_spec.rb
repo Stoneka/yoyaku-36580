@@ -73,7 +73,21 @@ RSpec.describe "Reserves", type: :system do
   end
   context '商品の予約を管理することができる' do
     it 'すでに商品が予約されていれば予約管理ページから予約を確認することができる' do
-      
+      #トップページに移動する
+      visit root_path
+      #トップページにログインボタンが表示されていることを確認する
+      expect(page).to have_content('ログイン')
+      #ログインページへ移動する
+      visit new_customer_session_path
+      #管理者でログインする
+      fill_in 'email', with: 'test@test'
+      fill_in 'password', with: '00000a'
+      find('input[name="commit"]').click
+      #トップページに遷移したことを確認する
+      expect(current_path).to eq(root_path)
+      #予約管理ページへのリンクがあることを確認する
+      #予約管理ページに移動する
+      #商品の予約情報が表示されていることを確認する
     end
   end
 end
