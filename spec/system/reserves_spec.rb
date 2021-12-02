@@ -75,6 +75,11 @@ RSpec.describe "Reserves", type: :system do
     it 'すでに商品が予約されていれば予約管理ページから予約を確認することができる' do
       #トップページに移動する
       visit root_path
+      #管理者アカウントでログインできていない。一旦ログアウトの操作をしてから再度管理者アカウントでログインする記述が必要
+      #トップページにログアウトボタンが表示されていることを確認する
+      #ログアウトボタンのリンクを確認し、ログアウトボタンをクリックする
+      #ログアウトが完了したことを確認する
+      #トップページに移動する
       #トップページにログインボタンが表示されていることを確認する
       expect(page).to have_content('ログイン')
       #ログインページへ移動する
@@ -83,9 +88,6 @@ RSpec.describe "Reserves", type: :system do
       fill_in 'email', with: 'test@test'
       fill_in 'password', with: '00000a'
       find('input[name="commit"]').click
-      #管理者アカウントでログインできていない。一旦ログアウトの操作をしてから再度管理者アカウントでログインする記述が必要
-
-      
       #トップページに遷移したことを確認する
       expect(current_path).to eq(root_path)
       #予約管理ページへのリンクがあることを確認する
