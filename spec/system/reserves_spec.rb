@@ -98,4 +98,13 @@ RSpec.describe "Reserves", type: :system do
       expect(page).to have_content('予約済商品一覧')
     end
   end
+  context '既に予約した商品をカートページで確認することができる' do
+    
+  end
+  context '既に予約した商品をカートページから削除することができる' do
+    
+  end
+  context '既に予約した商品をカートページから購入することができる' do
+    
+  end
 end
