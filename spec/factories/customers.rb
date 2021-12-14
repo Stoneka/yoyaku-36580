@@ -24,4 +24,17 @@ FactoryBot.define do
     phone                 { '12345678901' }
     admin                 { true }
   end
+  factory :test_customer, class: Customer do
+    email                 { 'test@test' }
+    password = '00000a'
+    password              { password }
+    password_confirmation { password }
+    last_name             { 'テスト' }
+    first_name            { 'テスト' }
+    last_name_kana        { 'テスト' }
+    first_name_kana       { 'テスト' }
+    birthday              { Faker::Date.birthday }
+    phone                 { '12345678901' }
+    admin                 { false }
+  end
 end
